@@ -17,7 +17,7 @@ def adiconar_tarefa ():
 
 def exibir_tarefa ():
     if not tarefas:
-        print("Você não tem tarefas ainda.")
+        listar_tarefas()
         input("\nPressione Enter para voltar ao menu...")
         return
     print("\nSuas tarefas: ")           

@@ -67,7 +67,7 @@ def apagar_tarefa ():
 
 while True:
     mostrar_menu()
-    escolha = int(input("Escolha uma opção: "))
+    escolha = input("Escolha uma opção: ")
     try:
         escolha = int(escolha)
     except ValueError:

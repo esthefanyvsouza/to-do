@@ -49,3 +49,19 @@ def alterar_status():
 
     tarefa["status"] = status[escolha]
     print(f"Status atualizado para '{status[escolha]}'!")
+
+def apagar_tarefa ():
+    if not tarefas:
+            print("Você não tem tarefas ainda.")
+            return
+    exibir_tarefa()
+    try:
+        index = int(input("Digite qual tarefa deseja apagar: ")) - 1
+        if 0 <= index < len(tarefas):
+            removed = tarefas.pop(index)
+            print(f"Tarefa apagada: {removed['tarefa']}")
+        else:
+            print("Número Inválido!")
+    except ValueError:
+        print("Coloque um número válido.")
+        

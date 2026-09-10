@@ -1,3 +1,6 @@
+azul = "\033[34m"
+amarelo = "\033[93m"
+
 tarefas = []
 
 status = ["a fazer", "fazendo", "concluida"]

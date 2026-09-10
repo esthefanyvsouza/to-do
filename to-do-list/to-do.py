@@ -64,4 +64,26 @@ def apagar_tarefa ():
             print("Número Inválido!")
     except ValueError:
         print("Coloque um número válido.")
-        
+
+while True:
+    mostrar_menu()
+    escolha = int(input("Escolha uma opção: "))
+    try:
+        escolha = int(escolha)
+    except ValueError:
+        print("Opção inválida, tente novamente")
+        continue
+
+    if escolha == 1:
+        adiconar_tarefa()
+    elif escolha == 2:
+        exibir_tarefa ()
+    elif escolha == 3:
+        alterar_status()
+    elif escolha == 4:
+        apagar_tarefa()
+    elif escolha == 5:
+        print("Adeus!")
+        break
+    else:
+        print("Opção inválida, tente novamente")

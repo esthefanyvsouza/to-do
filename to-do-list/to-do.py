@@ -6,7 +6,7 @@ reset = "\033[0m"
 
 tarefas = []
 
-status = ["a fazer", "fazendo", "concluida"]
+status = ["a fazer", "executando", "pronta"]
 
 def mostrar_menu ():
     print(f"{azul}===== LISTA DE TAREFAS ====={reset}")
@@ -15,21 +15,16 @@ def mostrar_menu ():
     print(f"{verde}3. Mudar status da tarefa{reset}")
     print(f"{verde}4. Apagar Tarefa{reset}")
     print(f"{verde}5. Sair{reset}")
+    print(f"{azul}{'=' * 29}{reset}")
 
-def adicionar_tarefa ():
-    tarefa = input("Insira a tarefa: ")
+def adicionar_tarefa():
+    while True:
+        tarefa = input("Insira a tarefa: ")
+        if len(tarefa) <= 80:
+            break
+        print(f"{vermelho}A tarefa não pode ter mais de 80 caracteres (você digitou {len(tarefa)}).{reset}")
     tarefas.append({"tarefa": tarefa, "status": "a fazer"})
     print(f"{amarelo}Tarefa '{tarefa}' adicionada!{reset}")
-
-def exibir_tarefa ():
-    if not tarefas:
-        listar_tarefas()
-        input("\nPressione Enter para voltar ao menu...")
-        return
-    print("\nSuas tarefas: ")           
-    for index, tarefa in enumerate(tarefas, start=1):
-        print(f"{index}. {tarefa['tarefa']}")
-    input("\nPressione Enter para voltar ao menu...")
 
 def alterar_status():
     if not tarefas:
@@ -54,6 +49,17 @@ def alterar_status():
     except ValueError:
         print(f"{vermelho}Opção inválida.{reset}")
         return
+
+    novo_status = status[escolha]
+
+    if novo_status == "executando":
+        quantidade_fazendo = sum(1 for t in tarefas if t["status"] == "executando")
+        if quantidade_fazendo >= 10 and tarefa["status"] != "executando":
+            print(f"{vermelho}Limite de 10 tarefas em 'executando' atingido. Mude outra tarefa antes.{reset}")
+            return
+
+    tarefa["status"] = novo_status
+    print(f"Status atualizado para '{novo_status}'!")
 
     tarefa["status"] = status[escolha]
     print(f"Status atualizado para '{status[escolha]}'!")

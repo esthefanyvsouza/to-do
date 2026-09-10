@@ -1,22 +1,25 @@
 azul = "\033[34m"
 amarelo = "\033[93m"
+vermelho = "\033[31m"
+verde = "\033[32m"
+reset = "\033[0m"
 
 tarefas = []
 
 status = ["a fazer", "fazendo", "concluida"]
 
 def mostrar_menu ():
-    print("\n===== LISTA DE TAREFAS =====")
-    print("1. Adicionar Tarefa")
-    print("2. Exibir tarefas")
-    print("3. Mudar status da tarefa")
-    print("4. Apagar Tarefa")
-    print("5. Sair")
+    print(f"{azul}===== LISTA DE TAREFAS ====={reset}")
+    print(f"{verde}1. Adicionar Tarefa{reset}")
+    print(f"{verde}2. Exibir tarefas{reset}")
+    print(f"{verde}3. Mudar status da tarefa{reset}")
+    print(f"{verde}4. Apagar Tarefa{reset}")
+    print(f"{verde}5. Sair{reset}")
 
-def adiconar_tarefa ():
+def adicionar_tarefa ():
     tarefa = input("Insira a tarefa: ")
     tarefas.append({"tarefa": tarefa, "status": "a fazer"})
-    print(f"Tarefa '{tarefa}' adicionada!")
+    print(f"{amarelo}Tarefa '{tarefa}' adicionada!{reset}")
 
 def exibir_tarefa ():
     if not tarefas:
@@ -30,7 +33,7 @@ def exibir_tarefa ():
 
 def alterar_status():
     if not tarefas:
-        print("\nVocê não tem tarefas ainda.")
+        print(f"\n{vermelho}Você não tem tarefas ainda.{reset}")
         return
     listar_tarefas()
     try:
@@ -49,7 +52,7 @@ def alterar_status():
         if escolha < 0 or escolha >= len(status):
             raise ValueError
     except ValueError:
-        print("Opção inválida.")
+        print(f"{vermelho}Opção inválida.{reset}")
         return
 
     tarefa["status"] = status[escolha]
@@ -57,11 +60,11 @@ def alterar_status():
 
 def listar_tarefas():
     if not tarefas:
-        print("Você não tem tarefas ainda.")
+        print(f"{vermelho}Você não tem tarefas ainda.{reset}")
         return False
     print("\nSuas tarefas: ")           
     for index, tarefa in enumerate(tarefas, start=1):
-        print(f"{index}. {tarefa['tarefa']} [{tarefa['status']}]")
+        print(f"{amarelo}{index}. {tarefa['tarefa']}{reset} [{tarefa['status']}]")
     return True
 
 def exibir_tarefa():
@@ -70,7 +73,7 @@ def exibir_tarefa():
 
 def apagar_tarefa ():
     if not tarefas:
-            print("Você não tem tarefas ainda.")
+            print(f"{vermelho}Você não tem tarefas ainda.{reset}")
             return
     listar_tarefas()
     try:
@@ -79,7 +82,7 @@ def apagar_tarefa ():
             removed = tarefas.pop(index)
             print(f"Tarefa apagada: {removed['tarefa']}")
         else:
-            print("Número Inválido!")
+            print(f"{vermelho}Número Inválido!{reset}")
     except ValueError:
         print("Coloque um número válido.")
 
@@ -89,11 +92,11 @@ while True:
     try:
         escolha = int(escolha)
     except ValueError:
-        print("Opção inválida, tente novamente")
+        print(f"{vermelho}Opção inválida, tente novamente{reset}")
         continue
 
     if escolha == 1:
-        adiconar_tarefa()
+        adicionar_tarefa()
     elif escolha == 2:
         exibir_tarefa ()
     elif escolha == 3:
@@ -104,4 +107,4 @@ while True:
         print("Adeus!")
         break
     else:
-        print("Opção inválida, tente novamente")
+        print(f"{vermelho}Opção inválida, tente novamente{reset}")

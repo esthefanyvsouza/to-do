@@ -18,16 +18,18 @@ def adiconar_tarefa ():
 def exibir_tarefa ():
     if not tarefas:
         print("Você não tem tarefas ainda.")
+        input("\nPressione Enter para voltar ao menu...")
         return
     print("\nSuas tarefas: ")           
     for index, tarefa in enumerate(tarefas, start=1):
         print(f"{index}. {tarefa['tarefa']}")
+    input("\nPressione Enter para voltar ao menu...")
 
 def alterar_status():
     if not tarefas:
-        print("Você não tem tarefas ainda.")
+        print("\nVocê não tem tarefas ainda.")
         return
-    exibir_tarefa()
+    listar_tarefas()
     try:
         indice = int(input("Digite o número da tarefa: ")) - 1
         tarefa = tarefas[indice]
@@ -50,11 +52,24 @@ def alterar_status():
     tarefa["status"] = status[escolha]
     print(f"Status atualizado para '{status[escolha]}'!")
 
+def listar_tarefas():
+    if not tarefas:
+        print("Você não tem tarefas ainda.")
+        return False
+    print("\nSuas tarefas: ")           
+    for index, tarefa in enumerate(tarefas, start=1):
+        print(f"{index}. {tarefa['tarefa']}")
+    return True
+
+def exibir_tarefa():
+    listar_tarefas()
+    input("\nPressione Enter para voltar ao menu...")
+
 def apagar_tarefa ():
     if not tarefas:
             print("Você não tem tarefas ainda.")
             return
-    exibir_tarefa()
+    listar_tarefas()
     try:
         index = int(input("Digite qual tarefa deseja apagar: ")) - 1
         if 0 <= index < len(tarefas):
@@ -67,7 +82,7 @@ def apagar_tarefa ():
 
 while True:
     mostrar_menu()
-    escolha = input("Escolha uma opção: ")
+    escolha = input("\nEscolha uma opção: ")
     try:
         escolha = int(escolha)
     except ValueError:

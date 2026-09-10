@@ -61,7 +61,7 @@ def listar_tarefas():
         return False
     print("\nSuas tarefas: ")           
     for index, tarefa in enumerate(tarefas, start=1):
-        print(f"{index}. {tarefa['tarefa']}")
+        print(f"{index}. {tarefa['tarefa']} [{tarefa['status']}]")
     return True
 
 def exibir_tarefa():

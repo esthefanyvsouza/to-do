@@ -22,3 +22,30 @@ def exibir_tarefa ():
     print("\nSuas tarefas: ")           
     for index, tarefa in enumerate(tarefas, start=1):
         print(f"{index}. {tarefa['tarefa']}")
+
+def alterar_status():
+    if not tarefas:
+        print("Você não tem tarefas ainda.")
+        return
+    exibir_tarefa()
+    try:
+        indice = int(input("Digite o número da tarefa: ")) - 1
+        tarefa = tarefas[indice]
+    except (ValueError, IndexError):
+        print("Tarefa inválida.")
+        return
+    
+    print("\nStatus disponíveis:")
+    for i, s in enumerate(status, start=1):
+        print(f"{i}. {s}")
+
+    try:
+        escolha = int(input("Escolha o número do novo status: ")) - 1
+        if escolha < 0 or escolha >= len(status):
+            raise ValueError
+    except ValueError:
+        print("Opção inválida.")
+        return
+
+    tarefa["status"] = status[escolha]
+    print(f"Status atualizado para '{status[escolha]}'!")
